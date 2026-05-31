@@ -46,3 +46,26 @@ export async function getTransactions(
   });
   return data;
 }
+
+export type TransactionInput = {
+  amount: number;
+  type: TransactionType;
+  description: string;
+  date: string;
+  accountId: number;
+  categoryId: number;
+};
+
+export async function createTransaction(input: TransactionInput): Promise<Transaction> {
+  const { data } = await apiClient.post<Transaction>("/api/transactions", input);
+  return data;
+}
+
+export async function updateTransaction(id: number, input: TransactionInput): Promise<Transaction> {
+  const { data } = await apiClient.put<Transaction>(`/api/transactions/${id}`, input);
+  return data;
+}
+
+export async function deleteTransaction(id: number): Promise<void> {
+  await apiClient.delete(`/api/transactions/${id}`);
+}
