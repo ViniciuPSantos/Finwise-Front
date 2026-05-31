@@ -103,9 +103,6 @@ export default function AppLayout() {
           </button>
           <span className="ml-auto flex items-center gap-[10px]">
             <span className="text-ink-500 text-sm">Maio / 2026</span>
-            <span className="w-8 h-8 rounded-full bg-pine-700 text-white inline-flex items-center justify-center font-bold text-[13px]">
-              AS
-            </span>
           </span>
         </header>
         <div className="flex-1 overflow-y-auto p-4 md:p-[26px]">
