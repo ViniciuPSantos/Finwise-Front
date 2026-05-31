@@ -5,6 +5,7 @@ import DashboardPage from "./pages/DashboardPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AppLayout from "./components/AppLayout";
 import TransactionsPage from "./pages/TransactionsPage";
+import BudgetsPage from "./pages/BudgetsPage";
 
 function App() {
   return (
@@ -19,6 +20,9 @@ function App() {
           <Route element={<AppLayout />}>
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/transactions" element={<TransactionsPage />} />
+          </Route>
+          <Route element={<AppLayout />}>
+            <Route path="/budgets" element={<BudgetsPage />} />
           </Route>
         </Route>
 

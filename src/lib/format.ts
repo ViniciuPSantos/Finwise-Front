@@ -12,3 +12,9 @@ export function monthLabel(ym: string): string{
     const [, m] = ym.split("-");
     return MESES[Number(m) - 1] ?? ym;
 }
+
+export function budgetBarColor(percentage: number): string{
+    if(percentage > 100) return "bg-expense";
+    if(percentage >= 80) return "bg-warning";
+    return "bg-income";
+}
