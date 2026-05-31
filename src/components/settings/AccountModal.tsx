@@ -4,7 +4,7 @@ import { z } from "zod";
 import CurrencyInput from "react-currency-input-field";
 import { toast } from "sonner";
 import { useAccountMutations } from "../../hooks/useAccountMutations";
-import { ACCOUNT_TYPE_LABELS, type AccountFull, type AccountType } from "../../services/accountServices";
+import { ACCOUNT_TYPE_LABELS, type AccountFull } from "../../services/accountServices";
 
 const schema = z.object({
   name: z.string().min(1, "Informe o nome"),

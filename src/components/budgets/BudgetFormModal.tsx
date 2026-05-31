@@ -5,7 +5,7 @@ import CurrencyInput from "react-currency-input-field";
 import { toast } from "sonner";
 import { useCategories } from "../../hooks/useLookups";
 import { useBudgetMutations } from "../../hooks/useBudgets";
-import type { BudgetStatus } from "../../services/BudgetService";
+import type { BudgetStatus } from "../../services/budgetService";
 
 const schema = z.object({
   amount: z.number({ error: "Informe o valor" }).positive("Valor deve ser maior que zero"),

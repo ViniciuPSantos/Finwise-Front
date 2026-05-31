@@ -5,7 +5,7 @@ import {
   updateBudget,
   deleteBudget,
   type BudgetInput,
-} from "../services/BudgetService";
+} from "../services/budgetService";
 
 export function useBudgetStatus(year: number, month: number) {
   return useQuery({

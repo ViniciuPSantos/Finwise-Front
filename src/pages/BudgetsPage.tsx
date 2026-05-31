@@ -5,7 +5,7 @@ import { useBudgetStatus, useBudgetMutations } from "../hooks/useBudgets";
 import BudgetCard from "../components/budgets/BudgetCard";
 import BudgetFormModal from "../components/budgets/BudgetFormModal";
 import ConfirmDialog from "../components/ConfirmDialog";
-import type { BudgetStatus } from "../services/BudgetService";
+import type { BudgetStatus } from "../services/budgetService";
 
 const YEAR = 2026;
 const MONTH = 5;
@@ -53,7 +53,7 @@ export default function BudgetsPage() {
         <p className="text-text-secondary">Nenhum orçamento definido para este mês.</p>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {query.data!.map((b) => (
+          {query.data!.map((b: BudgetStatus) => (
             <BudgetCard key={b.budgetId} budget={b} onEdit={openEdit} onDelete={setDeleting} />
           ))}
         </div>

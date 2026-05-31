@@ -1,6 +1,6 @@
 import { Pencil, Trash2 } from "lucide-react";
 import { formatBRL, budgetBarColor } from "../../lib/format";
-import type { BudgetStatus } from "../../services/BudgetService";
+import type { BudgetStatus } from "../../services/budgetService";
 
 type Props = {
   budget: BudgetStatus;
