@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
-import { LayoutDashboard, Receipt, Wallet, FolderTree, Upload, LogOut, Landmark, Menu, X } from "lucide-react";
+import { LayoutDashboard, Receipt, Wallet, FolderTree, Upload, LogOut, Landmark, Menu, X, Sprout } from "lucide-react";
 import { useAuthStore } from "../store/authStore";
 import { logout } from "../services/authService";
 
@@ -28,7 +28,7 @@ export default function AppLayout() {
   }
 
   return (
-    <div className="min-h-screen flex">
+    <div className="min-h-screen flex bg-background">
       {/* overlay (só mobile, quando aberto) */}
       {menuOpen && (
         <div
@@ -39,26 +39,34 @@ export default function AppLayout() {
 
       {/* sidebar: drawer no mobile, fixa no desktop */}
       <aside
-        className={`fixed inset-y-0 left-0 w-60 bg-surface flex flex-col z-40 transition-transform
+        className={`fixed inset-y-0 left-0 w-60 bg-sidebar flex flex-col z-40 transition-transform
           md:static md:translate-x-0
           ${menuOpen ? "translate-x-0" : "-translate-x-full"}`}
       >
         <div className="p-6 flex items-center justify-between">
-          <span className="text-xl font-bold">FinWise</span>
+          <span className="flex items-center gap-2 text-xl font-bold text-accent">
+            <span className="flex items-center justify-center w-8 h-8 rounded-md bg-accent/15">
+              <Sprout size={20} className="text-accent" />
+            </span>
+            Finwise
+          </span>
           {/* botão fechar, só no mobile */}
-          <button className="md:hidden text-text-secondary" onClick={() => setMenuOpen(false)}>
+          <button className="md:hidden text-text-on-dark/70" onClick={() => setMenuOpen(false)}>
             <X size={20} />
           </button>
         </div>
+
         <nav className="flex-1 px-3 space-y-1">
           {navItems.map(({ to, label, icon: Icon }) => (
             <NavLink
               key={to}
               to={to}
-              onClick={() => setMenuOpen(false)} // fecha a gaveta ao navegar (mobile)
+              onClick={() => setMenuOpen(false)}
               className={({ isActive }) =>
-                `flex items-center gap-3 px-3 py-2 rounded-md text-sm ${
-                  isActive ? "bg-primary text-text-primary" : "text-text-secondary hover:bg-surface-elevated"
+                `flex items-center gap-3 px-3 py-2 rounded-md text-sm transition-colors ${
+                  isActive
+                    ? "bg-primary text-text-on-dark font-medium"
+                    : "text-text-on-dark/70 hover:bg-sidebar-hover hover:text-text-on-dark"
                 }`
               }
             >
@@ -67,9 +75,10 @@ export default function AppLayout() {
             </NavLink>
           ))}
         </nav>
+
         <button
           onClick={handleLogout}
-          className="flex items-center gap-3 px-6 py-4 text-sm text-text-secondary hover:text-text-primary"
+          className="flex items-center gap-3 px-6 py-4 text-sm text-text-on-dark/70 hover:text-text-on-dark"
         >
           <LogOut size={18} />
           Sair
@@ -78,12 +87,12 @@ export default function AppLayout() {
 
       {/* área principal */}
       <main className="flex-1 flex flex-col min-w-0">
-        <header className="h-16 bg-surface flex items-center gap-3 px-4 md:px-6 shrink-0">
+        <header className="h-16 bg-transparent flex items-center gap-3 px-4 md:px-6 shrink-0">
           {/* hambúrguer, só no mobile */}
           <button className="md:hidden text-text-secondary" onClick={() => setMenuOpen(true)}>
             <Menu size={22} />
           </button>
-          <span className="text-text-secondary text-sm">Maio / 2026</span>
+          <span className="text-text-secondary text-sm ml-auto">Maio / 2026</span>
         </header>
         <div className="flex-1 p-4 md:p-6 overflow-auto">
           <Outlet />
