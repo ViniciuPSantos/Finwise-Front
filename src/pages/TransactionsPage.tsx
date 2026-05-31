@@ -50,7 +50,7 @@ export default function TransactionsPage() {
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <h2 className="text-xl font-semibold">Extrato</h2>
-        <button onClick={openCreate} className="flex items-center gap-2 bg-primary rounded-md px-4 py-2 text-sm font-medium">
+        <button onClick={openCreate} className="flex items-center text-white hover:bg-primary-hover gap-2 bg-primary rounded-md px-4 py-2 text-sm font-medium">
           <Plus size={16} /> Nova transação
         </button>
       </div>

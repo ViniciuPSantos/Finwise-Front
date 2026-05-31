@@ -40,7 +40,7 @@ export default function BudgetsPage() {
     <div className="space-y-4">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <h2 className="text-xl font-semibold">Orçamentos — Maio / 2026</h2>
-        <button onClick={openCreate} className="flex items-center gap-2 bg-primary rounded-md px-4 py-2 text-sm font-medium">
+        <button onClick={openCreate} className="flex items-center text-white hover:bg-primary-hover gap-2 bg-primary rounded-md px-4 py-2 text-sm font-medium">
           <Plus size={16} /> Novo orçamento
         </button>
       </div>

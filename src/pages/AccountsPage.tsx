@@ -27,7 +27,7 @@ export default function AccountsPage() {
     <div className="space-y-4 max-w-2xl">
       <div className="flex items-center justify-between">
         <h2 className="text-xl font-semibold">Contas</h2>
-        <button onClick={() => { setEditing(undefined); setModalOpen(true); }} className="flex items-center gap-2 bg-primary rounded-md px-4 py-2 text-sm font-medium">
+        <button onClick={() => { setEditing(undefined); setModalOpen(true); }} className="flex items-center text-white hover:bg-primary-hover gap-2 bg-primary rounded-md px-4 py-2 text-sm font-medium">
           <Plus size={16} /> Nova conta
         </button>
       </div>

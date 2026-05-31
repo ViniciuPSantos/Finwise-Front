@@ -94,7 +94,7 @@ export default function BudgetFormModal({ budget, year, month, onClose }: Props)
             <button type="button" onClick={onClose} className="flex-1 py-2 rounded-md bg-surface-elevated">
               Cancelar
             </button>
-            <button type="submit" disabled={saving} className="flex-1 py-2 rounded-md bg-primary disabled:opacity-50">
+            <button type="submit" disabled={saving} className="flex-1 py-2 rounded-md bg-primary text-white hover:bg-primary-hover disabled:opacity-50">
               {saving ? "Salvando..." : "Salvar"}
             </button>
           </div>

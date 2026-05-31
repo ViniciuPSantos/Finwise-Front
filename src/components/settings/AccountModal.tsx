@@ -78,7 +78,7 @@ export default function AccountModal({ account, onClose }: { account?: AccountFu
           </div>
           <div className="flex gap-2 pt-2">
             <button type="button" onClick={onClose} className="flex-1 py-2 rounded-md bg-surface-elevated">Cancelar</button>
-            <button type="submit" disabled={saving} className="flex-1 py-2 rounded-md bg-primary disabled:opacity-50">
+            <button type="submit" disabled={saving} className="flex-1 py-2 text-white hover:bg-primary-hover rounded-md bg-primary disabled:opacity-50">
               {saving ? "Salvando..." : "Salvar"}
             </button>
           </div>

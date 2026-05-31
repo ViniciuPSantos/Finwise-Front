@@ -10,7 +10,7 @@ export default function LandingPage() {
       <div className="flex flex-col sm:flex-row gap-3 w-full max-w-xs sm:max-w-md">
         <Link
           to="/login"
-          className="flex-1 bg-primary rounded-md py-3 font-medium"
+          className="flex-1 text-white hover:bg-primary-hover bg-primary rounded-md py-3 font-medium"
         >
           Entrar
         </Link>
