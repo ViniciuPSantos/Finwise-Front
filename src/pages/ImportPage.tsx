@@ -17,24 +17,18 @@ export default function ImportPage() {
   }
 
   return (
-    <div className="space-y-6">
-      <h2 className="text-xl font-semibold">Importar transações</h2>
+    <div className="max-w-[680px] mx-auto space-y-6">
+      <h2 className="font-display font-bold text-h2 text-ink-900">Importar transações</h2>
 
-      <div className="max-w-3xl mx-auto space-y-6">
-        <FileDropzone onFile={handleFile} disabled={importMutation.isPending} />
+      <FileDropzone onFile={handleFile} disabled={importMutation.isPending} />
 
-        {importMutation.isPending && (
-          <p className="text-text-secondary text-sm">Importando {fileName}...</p>
-        )}
-
-        {importMutation.isError && (
-          <p className="text-expense text-sm">
-            Erro ao importar. Verifique o arquivo e tente novamente.
-          </p>
-        )}
-
-        {importMutation.data && <ImportResultView result={importMutation.data} />}
-      </div>
+      {importMutation.isPending && (
+        <p className="text-ink-500 text-sm">Importando {fileName}...</p>
+      )}
+      {importMutation.isError && (
+        <p className="text-expense text-sm">Erro ao importar. Verifique o arquivo e tente novamente.</p>
+      )}
+      {importMutation.data && <ImportResultView result={importMutation.data} />}
     </div>
   );
 }

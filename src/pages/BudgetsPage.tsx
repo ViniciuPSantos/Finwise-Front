@@ -17,42 +17,33 @@ export default function BudgetsPage() {
   const [editing, setEditing] = useState<BudgetStatus | undefined>();
   const [deleting, setDeleting] = useState<BudgetStatus | undefined>();
 
-  function openCreate() {
-    setEditing(undefined);
-    setModalOpen(true);
-  }
-  function openEdit(b: BudgetStatus) {
-    setEditing(b);
-    setModalOpen(true);
-  }
+  function openCreate() { setEditing(undefined); setModalOpen(true); }
+  function openEdit(b: BudgetStatus) { setEditing(b); setModalOpen(true); }
   function confirmDelete() {
     if (!deleting) return;
     remove.mutate(deleting.budgetId, {
-      onSuccess: () => {
-        toast.success("Orçamento excluído");
-        setDeleting(undefined);
-      },
+      onSuccess: () => { toast.success("Orçamento excluído"); setDeleting(undefined); },
       onError: () => toast.error("Erro ao excluir"),
     });
   }
 
   return (
-    <div className="space-y-4">
+    <div className="max-w-[980px] mx-auto space-y-4">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-        <h2 className="text-xl font-semibold">Orçamentos — Maio / 2026</h2>
-        <button onClick={openCreate} className="flex items-center text-white hover:bg-primary-hover gap-2 bg-primary rounded-md px-4 py-2 text-sm font-medium">
-          <Plus size={16} /> Novo orçamento
+        <h2 className="font-display font-bold text-h2 text-ink-900">Orçamentos</h2>
+        <button onClick={openCreate} className="inline-flex items-center gap-2 bg-pine-700 text-white hover:bg-pine-800 rounded-sm px-4 py-2.5 text-sm font-semibold shadow-pine transition-colors active:scale-[0.975]">
+          <Plus size={17} /> Novo orçamento
         </button>
       </div>
 
       {query.isLoading ? (
-        <p className="text-text-secondary">Carregando...</p>
+        <p className="text-ink-500">Carregando...</p>
       ) : query.isError ? (
         <p className="text-expense">Erro ao carregar orçamentos.</p>
       ) : query.data!.length === 0 ? (
-        <p className="text-text-secondary">Nenhum orçamento definido para este mês.</p>
+        <p className="text-ink-500">Nenhum orçamento definido para este mês.</p>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {query.data!.map((b: BudgetStatus) => (
             <BudgetCard key={b.budgetId} budget={b} onEdit={openEdit} onDelete={setDeleting} />
           ))}
