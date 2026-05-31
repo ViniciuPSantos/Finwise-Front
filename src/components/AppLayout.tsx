@@ -27,74 +27,88 @@ export default function AppLayout() {
     }
   }
 
+  const navItemClass = (isActive: boolean) =>
+    `flex items-center gap-3 px-3 py-2.5 rounded-sm text-sm w-full text-left transition-colors ${
+      isActive
+        ? "bg-pine-600 text-white font-semibold"
+        : "text-cream-500 hover:bg-vault-elev hover:text-cream-100"
+    }`;
+
   return (
-    <div className="min-h-screen flex bg-background">
+    <div className="flex h-screen overflow-hidden bg-background">
       {/* overlay (só mobile, quando aberto) */}
       {menuOpen && (
         <div
-          className="fixed inset-0 bg-black/60 z-30 md:hidden"
+          className="fixed inset-0 bg-black/50 z-30 md:hidden"
           onClick={() => setMenuOpen(false)}
         />
       )}
 
       {/* sidebar: drawer no mobile, fixa no desktop */}
       <aside
-        className={`fixed inset-y-0 left-0 w-60 bg-sidebar flex flex-col z-40 transition-transform
+        className={`fixed inset-y-0 left-0 w-60 bg-vault-bg flex flex-col z-40 transition-transform
           md:static md:translate-x-0
           ${menuOpen ? "translate-x-0" : "-translate-x-full"}`}
       >
-        <div className="p-6 flex items-center justify-between">
-          <span className="flex items-center gap-2 text-xl font-bold text-accent">
-            <span className="flex items-center justify-center w-8 h-8 rounded-md bg-accent/15">
-              <Sprout size={20} className="text-accent" />
-            </span>
+        <div className="flex items-center gap-3 px-[22px] pt-[22px] pb-[18px]">
+          {/* troque /logo.svg pelo seu arquivo em public/ — sem ele, cai no Sprout */}
+          <span className="flex items-center justify-center w-[30px] h-[30px] rounded-md bg-mint-500/15 overflow-hidden shrink-0">
+            <img
+              src="/logo.svg"
+              alt="Finwise"
+              className="w-full h-full object-contain"
+              onError={(e) => {
+                e.currentTarget.style.display = "none";
+                e.currentTarget.nextElementSibling?.classList.remove("hidden");
+              }}
+            />
+            <Sprout size={19} className="text-mint-300 hidden" />
+          </span>
+          <span className="font-display font-extrabold text-[22px] tracking-tight text-mint-300">
             Finwise
           </span>
-          {/* botão fechar, só no mobile */}
-          <button className="md:hidden text-text-on-dark/70" onClick={() => setMenuOpen(false)}>
+          <button className="md:hidden text-cream-500 ml-auto" onClick={() => setMenuOpen(false)}>
             <X size={20} />
           </button>
         </div>
 
-        <nav className="flex-1 px-3 space-y-1">
+        <nav className="flex-1 px-3 flex flex-col gap-[3px]">
           {navItems.map(({ to, label, icon: Icon }) => (
             <NavLink
               key={to}
               to={to}
               onClick={() => setMenuOpen(false)}
-              className={({ isActive }) =>
-                `flex items-center gap-3 px-3 py-2 rounded-md text-sm transition-colors ${
-                  isActive
-                    ? "bg-primary text-text-on-dark font-medium"
-                    : "text-text-on-dark/70 hover:bg-sidebar-hover hover:text-text-on-dark"
-                }`
-              }
+              className={({ isActive }) => navItemClass(isActive)}
             >
-              <Icon size={18} />
+              <Icon size={19} />
               {label}
             </NavLink>
           ))}
         </nav>
 
-        <button
-          onClick={handleLogout}
-          className="flex items-center gap-3 px-6 py-4 text-sm text-text-on-dark/70 hover:text-text-on-dark"
-        >
-          <LogOut size={18} />
-          Sair
-        </button>
+        <div className="p-3 border-t border-vault-line">
+          <button onClick={handleLogout} className={navItemClass(false)}>
+            <LogOut size={19} />
+            Sair
+          </button>
+        </div>
       </aside>
 
       {/* área principal */}
       <main className="flex-1 flex flex-col min-w-0">
-        <header className="h-16 bg-transparent flex items-center gap-3 px-4 md:px-6 shrink-0">
+        <header className="h-[62px] shrink-0 flex items-center gap-3 px-4 md:px-[26px] border-b border-line sticky top-0 z-10 bg-paper/80 backdrop-blur">
           {/* hambúrguer, só no mobile */}
-          <button className="md:hidden text-text-secondary" onClick={() => setMenuOpen(true)}>
+          <button className="md:hidden text-ink-500" onClick={() => setMenuOpen(true)}>
             <Menu size={22} />
           </button>
-          <span className="text-text-secondary text-sm ml-auto">Maio / 2026</span>
+          <span className="ml-auto flex items-center gap-[10px]">
+            <span className="text-ink-500 text-sm">Maio / 2026</span>
+            <span className="w-8 h-8 rounded-full bg-pine-700 text-white inline-flex items-center justify-center font-bold text-[13px]">
+              AS
+            </span>
+          </span>
         </header>
-        <div className="flex-1 p-4 md:p-6 overflow-auto">
+        <div className="flex-1 overflow-y-auto p-4 md:p-[26px]">
           <Outlet />
         </div>
       </main>
