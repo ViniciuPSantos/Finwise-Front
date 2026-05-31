@@ -47,25 +47,28 @@ export default function TransactionsPage() {
   }
 
   return (
-    <div className="space-y-4">
+    <div className="max-w-[980px] mx-auto space-y-4">
       <div className="flex items-center justify-between">
-        <h2 className="text-xl font-semibold">Extrato</h2>
-        <button onClick={openCreate} className="flex items-center text-white hover:bg-primary-hover gap-2 bg-primary rounded-md px-4 py-2 text-sm font-medium">
-          <Plus size={16} /> Nova transação
+        <h2 className="font-display font-bold text-h2 text-ink-900">Extrato</h2>
+        <button
+          onClick={openCreate}
+          className="inline-flex items-center gap-2 bg-pine-700 text-white hover:bg-pine-800 rounded-sm px-4 py-2.5 text-sm font-semibold shadow-pine transition-colors active:scale-[0.975]"
+        >
+          <Plus size={17} /> Nova transação
         </button>
       </div>
 
       <TransactionFilters value={filters} onChange={handleFilterChange} />
 
-      <div className="bg-surface rounded-lg shadow-card overflow-hidden">
+      <div className="bg-surface rounded-md shadow-card overflow-hidden">
         {query.isLoading ? (
-          <p className="text-text-secondary p-6">Carregando...</p>
+          <p className="text-ink-500 p-6">Carregando...</p>
         ) : query.isError ? (
           <p className="text-expense p-6">Erro ao carregar transações.</p>
         ) : (
           <>
             <div className="overflow-x-auto">
-            <TransactionTable rows={query.data!.content} onEdit={openEdit} onDelete={setDeleting} />
+              <TransactionTable rows={query.data!.content} onEdit={openEdit} onDelete={setDeleting} />
             </div>
             <Pagination
               page={page}

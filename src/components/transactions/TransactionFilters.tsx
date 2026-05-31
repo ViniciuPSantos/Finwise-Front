@@ -15,7 +15,7 @@ type Props = {
 };
 
 const inputClass =
-  "bg-background rounded-md px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-primary";
+  "rounded-sm px-3 py-2 text-sm bg-white text-ink-900 ring-1 ring-line-strong outline-none focus:ring-1.5 focus:ring-pine-600 transition";
 
 export default function TransactionFilters({ value, onChange }: Props) {
   const accounts = useAccounts();
@@ -26,7 +26,7 @@ export default function TransactionFilters({ value, onChange }: Props) {
   }
 
   return (
-    <div className="bg-surface rounded-lg p-4 flex flex-wrap gap-3">
+    <div className="bg-surface rounded-md shadow-card p-4 flex flex-wrap gap-3">
       <select
         className={inputClass}
         value={value.accountId ?? ""}
