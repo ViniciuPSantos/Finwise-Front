@@ -7,16 +7,16 @@ type Props = {
 };
 
 const toneClass = {
-  default: "text-text-primary",
+  default: "text-ink-900",
   income: "text-income",
   expense: "text-expense",
 };
 
 export default function StatCard({ label, value, tone = "default" }: Props) {
   return (
-    <div className="bg-surface rounded-lg shadow-card p-6 flex-1">
-      <p className="text-text-secondary text-sm">{label}</p>
-      <p className={`font-mono text-3xl font-bold mt-2 ${toneClass[tone]}`}>
+    <div className="bg-surface rounded-md shadow-card p-6 flex-1 min-w-0">
+      <p className="text-ink-500 text-sm">{label}</p>
+      <p className={`font-mono text-3xl font-bold mt-2 tabular-nums ${toneClass[tone]}`}>
         {formatBRL(value)}
       </p>
     </div>

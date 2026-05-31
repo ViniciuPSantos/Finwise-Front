@@ -7,15 +7,34 @@ export default function EvolutionChart({ data }: { data: Point[] }) {
   return (
     <ResponsiveContainer width="100%" height={280}>
       <AreaChart data={data}>
-        <CartesianGrid strokeDasharray="3 3" stroke="#242840" />
-        <XAxis dataKey="mes" stroke="#A0AEC0" />
-        <YAxis stroke="#A0AEC0" width={80} tickFormatter={(v) => formatBRL(v)} />
+        <CartesianGrid strokeDasharray="3 4" stroke="#E2E0D4" vertical={false} />
+        <XAxis
+          dataKey="mes"
+          stroke="#7E8C83"
+          tickLine={false}
+          axisLine={{ stroke: "#E2E0D4" }}
+          tick={{ fontFamily: "'Space Mono', monospace", fontSize: 11 }}
+        />
+        <YAxis
+          stroke="#7E8C83"
+          width={80}
+          tickLine={false}
+          axisLine={false}
+          tick={{ fontFamily: "'Space Mono', monospace", fontSize: 11 }}
+          tickFormatter={(v) => formatBRL(v)}
+        />
         <Tooltip
           formatter={(value) => formatBRL(Number(value))}
-          contentStyle={{ background: "#1A1D2E", border: "none", borderRadius: 8 }}
+          contentStyle={{
+            background: "#FFFFFF",
+            border: "1px solid #E2E0D4",
+            borderRadius: 10,
+            boxShadow: "0 4px 16px rgba(20,32,27,0.07)",
+          }}
+          labelStyle={{ color: "#14201B" }}
         />
-        <Area type="monotone" dataKey="receitas" stroke="#4ADE80" fill="#4ADE80" fillOpacity={0.2} />
-        <Area type="monotone" dataKey="despesas" stroke="#F87171" fill="#F87171" fillOpacity={0.2} />
+        <Area type="monotone" dataKey="receitas" stroke="#1FA971" fill="#1FA971" fillOpacity={0.14} strokeWidth={2.5} />
+        <Area type="monotone" dataKey="despesas" stroke="#D9543D" fill="#D9543D" fillOpacity={0.12} strokeWidth={2.5} />
       </AreaChart>
     </ResponsiveContainer>
   );
