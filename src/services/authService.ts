@@ -25,3 +25,10 @@ export async function refreshAccessToken(refreshToken: string) {
   });
   return data as { accessToken: string; refreshToken: string; tokenType: string };
 }
+
+export type RegisterInput = { name: string; email: string; password: string };
+
+export async function register(input: RegisterInput): Promise<{ id: number; name: string; email: string }> {
+  const { data } = await apiClient.post("/api/auth/register", input);
+  return data;
+}
