@@ -6,7 +6,7 @@ import TransactionFilters, { type FilterValues } from "../components/transaction
 import TransactionTable from "../components/transactions/TransactionTable";
 import Pagination from "../components/transactions/Pagination";
 import TransactionFormModal from "../components/transactions/TransactionFormModal";
-import ConfirmDialog from "../components/ConfirmaDialog";
+import ConfirmDialog from "../components/ConfirmDialog";
 import type { Transaction } from "../services/transactionService";
 import { toast } from "sonner";
 
@@ -64,7 +64,9 @@ export default function TransactionsPage() {
           <p className="text-expense p-6">Erro ao carregar transações.</p>
         ) : (
           <>
+            <div className="overflow-x-auto">
             <TransactionTable rows={query.data!.content} onEdit={openEdit} onDelete={setDeleting} />
+            </div>
             <Pagination
               page={page}
               totalPages={query.data!.totalPages}

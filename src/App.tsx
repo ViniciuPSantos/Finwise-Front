@@ -7,6 +7,8 @@ import AppLayout from "./components/AppLayout";
 import TransactionsPage from "./pages/TransactionsPage";
 import BudgetsPage from "./pages/BudgetsPage";
 import ImportPage from "./pages/ImportPage";
+import CategoriesPage from "./pages/CategoriesPage";
+import AccountsPage from "./pages/AccountsPage";
 
 function App() {
   return (
@@ -28,6 +30,12 @@ function App() {
         </Route>
         <Route element={<AppLayout />}>
           <Route path="/import" element={<ImportPage />}/>
+        </Route>
+        <Route element={<AppLayout />}>
+          <Route path="/categories" element={<CategoriesPage />}/>
+        </Route>
+        <Route element={<AppLayout />}>
+          <Route path="/accounts" element={<AccountsPage />}/>
         </Route>
 
         <Route path="*" element={<Navigate to="/dashboard" replace />} />

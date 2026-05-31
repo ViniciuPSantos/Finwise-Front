@@ -13,7 +13,7 @@ export default function TransactionTable({ rows, onEdit, onDelete }: Props) {
     return <p className="text-text-secondary text-sm p-6">Nenhuma transação encontrada.</p>;
   }
   return (
-    <table className="w-full text-sm">
+    <table className="w-full min-w-[640px] text-sm">
       <thead className="text-text-secondary text-left">
         <tr className="border-b border-surface-elevated">
           <th className="py-3 px-4 font-medium">Data</th>

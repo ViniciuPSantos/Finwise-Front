@@ -4,7 +4,7 @@ import { toast } from "sonner";
 import { useBudgetStatus, useBudgetMutations } from "../hooks/useBudgets";
 import BudgetCard from "../components/budgets/BudgetCard";
 import BudgetFormModal from "../components/budgets/BudgetFormModal";
-import ConfirmDialog from "../components/ConfirmaDialog";
+import ConfirmDialog from "../components/ConfirmDialog";
 import type { BudgetStatus } from "../services/BudgetService";
 
 const YEAR = 2026;
@@ -38,7 +38,7 @@ export default function BudgetsPage() {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <h2 className="text-xl font-semibold">Orçamentos — Maio / 2026</h2>
         <button onClick={openCreate} className="flex items-center gap-2 bg-primary rounded-md px-4 py-2 text-sm font-medium">
           <Plus size={16} /> Novo orçamento

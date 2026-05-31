@@ -21,7 +21,7 @@ export default function DashboardPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex gap-4">
+      <div className="flex flex-col md:flex-row gap-4">
         <StatCard label="Saldo do mês" value={summary.balance} />
         <StatCard label="Receitas" value={summary.totalIncome} tone="income" />
         <StatCard label="Despesas" value={summary.totalExpense} tone="expense" />
