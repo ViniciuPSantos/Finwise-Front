@@ -1,73 +1,96 @@
-# React + TypeScript + Vite
+# FinWise Web
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Frontend da aplicação FinWise — gerenciamento de finanças pessoais com dashboard, controle de transações, orçamentos e importação via CSV.
 
-Currently, two official plugins are available:
+## Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+| Camada | Tecnologia |
+|---|---|
+| Framework | React 19 + TypeScript 6 |
+| Build | Vite 8 |
+| Roteamento | React Router DOM 7 |
+| Estado global | Zustand 5 |
+| Cache/fetching | TanStack Query 5 |
+| HTTP | Axios |
+| Formulários | React Hook Form + Zod |
+| Gráficos | Recharts |
+| Estilo | Tailwind CSS 3 |
+| Toasts | Sonner |
+| Ícones | Lucide React |
 
-## React Compiler
+## Pré-requisitos
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Node.js 18+
+- API backend rodando (ver variáveis de ambiente)
 
-## Expanding the ESLint configuration
+## Como rodar
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+```bash
+cd finwise-web
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+# instalar dependências
+npm install
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+# rodar em modo de desenvolvimento
+npm run dev
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# build de produção
+npm run build
+
+# pré-visualizar build
+npm run preview
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Variáveis de ambiente
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Crie um arquivo `.env` na raiz de `finwise-web/`:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```env
+VITE_API_URL=http://localhost:8080
 ```
+
+| Variável | Descrição |
+|---|---|
+| `VITE_API_URL` | URL base da API REST backend |
+
+## Estrutura de páginas
+
+| Rota | Página | Acesso |
+|---|---|---|
+| `/` | Landing Page | Público |
+| `/login` | Login | Público |
+| `/register` | Cadastro | Público |
+| `/dashboard` | Visão geral mensal | Autenticado |
+| `/transactions` | Listagem e CRUD de transações | Autenticado |
+| `/budgets` | Gerenciamento de orçamentos | Autenticado |
+| `/accounts` | Gerenciamento de contas | Autenticado |
+| `/categories` | Gerenciamento de categorias | Autenticado |
+| `/import` | Importação de transações via CSV | Autenticado |
+
+## Autenticação
+
+Fluxo JWT com refresh token:
+
+- O access token é mantido em memória (Zustand).
+- O refresh token é persistido no `localStorage` sob a chave `finwise.refreshToken`.
+- Interceptor do Axios renova o access token automaticamente em respostas `401`, enfileirando requisições concorrentes durante o refresh.
+
+## Endpoints consumidos
+
+| Método | Endpoint | Uso |
+|---|---|---|
+| `POST` | `/api/auth/login` | Login |
+| `POST` | `/api/auth/register` | Cadastro |
+| `POST` | `/api/auth/logout` | Logout |
+| `POST` | `/api/auth/refresh` | Renovação de token |
+| `GET` | `/api/dashboard/overview` | Resumo mensal (receita, despesa, saldo, gráfico de categorias) |
+| `GET` | `/api/dashboard/monthly-evolution` | Evolução mensal para gráfico de linha |
+| `GET/POST/PUT/DELETE` | `/api/transactions` | CRUD de transações com filtros e paginação |
+| `GET/POST/PUT/DELETE` | `/api/accounts` | CRUD de contas |
+| `GET/POST/PUT/DELETE` | `/api/categories` | CRUD de categorias |
+| `GET/POST/PUT/DELETE` | `/api/budgets` | CRUD de orçamentos |
+| `POST` | `/api/imports/csv` | Importação de transações via arquivo CSV (`multipart/form-data`) |
+
+## Importação CSV
+
+A página `/import` aceita upload de arquivo `.csv` via drag-and-drop ou seleção. O backend retorna um resumo com total de linhas, registros importados, ignorados, erros por linha e categorias criadas automaticamente.
