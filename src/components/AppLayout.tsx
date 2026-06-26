@@ -102,7 +102,9 @@ export default function AppLayout() {
             <Menu size={22} />
           </button>
           <span className="ml-auto flex items-center gap-[10px]">
-            <span className="text-ink-500 text-sm">Maio / 2026</span>
+            <span className="text-ink-500 text-sm capitalize">
+              {new Date().toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' }).replace(' de ', ' / ')}
+            </span>
           </span>
         </header>
         <div className="flex-1 overflow-y-auto p-4 md:p-[26px]">
