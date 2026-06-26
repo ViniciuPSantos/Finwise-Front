@@ -1,12 +1,15 @@
 import { useState } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
-import { LayoutDashboard, Receipt, Wallet, FolderTree, Upload, LogOut, Landmark, Menu, X, Sprout } from "lucide-react";
+import { LayoutDashboard, Receipt, Wallet, FolderTree, Upload, LogOut, Landmark, Menu, X, Sprout, ArrowLeftRight, Repeat2 } from "lucide-react";
 import { useAuthStore } from "../store/authStore";
 import { logout } from "../services/authService";
+import { useMe } from "../hooks/useMe";
 
 const navItems = [
   { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { to: "/transactions", label: "Extrato", icon: Receipt },
+  { to: "/transfers", label: "Transferências", icon: ArrowLeftRight },
+  { to: "/recurring", label: "Recorrentes", icon: Repeat2 },
   { to: "/budgets", label: "Orçamentos", icon: Wallet },
   { to: "/accounts", label: "Contas", icon: Landmark },
   { to: "/categories", label: "Categorias", icon: FolderTree },
@@ -17,6 +20,7 @@ export default function AppLayout() {
   const navigate = useNavigate();
   const { refreshToken, clearTokens } = useAuthStore();
   const [menuOpen, setMenuOpen] = useState(false);
+  const { data: me } = useMe();
 
   async function handleLogout() {
     try {
@@ -105,6 +109,11 @@ export default function AppLayout() {
             <span className="text-ink-500 text-sm capitalize">
               {new Date().toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' }).replace(' de ', ' / ')}
             </span>
+            {me && (
+              <span className="hidden sm:flex items-center justify-center w-8 h-8 rounded-full bg-pine-700 text-white text-[13px] font-bold uppercase" title={me.name}>
+                {me.name.charAt(0)}
+              </span>
+            )}
           </span>
         </header>
         <div className="flex-1 overflow-y-auto p-4 md:p-[26px]">

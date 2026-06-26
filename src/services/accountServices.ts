@@ -2,8 +2,8 @@ import { apiClient } from "../lib/apiClient";
 
 export type Account = { id: number; name: string };
 
-export async function getAccounts(): Promise<Account[]> {
-    const { data } = await apiClient.get<Account[]>("/api/accounts");
+export async function getAccounts(): Promise<AccountFull[]> {
+    const { data } = await apiClient.get<AccountFull[]>("/api/accounts");
     return data;
 }
 

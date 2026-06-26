@@ -9,6 +9,8 @@ import BudgetsPage from "./pages/BudgetsPage";
 import AccountsPage from "./pages/AccountsPage";
 import CategoriesPage from "./pages/CategoriesPage";
 import ImportPage from "./pages/ImportPage";
+import TransfersPage from "./pages/TransfersPage";
+import RecurringPage from "./pages/RecurringPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PublicOnlyRoute from "./components/PublicOnlyRoute";
 import AppLayout from "./components/AppLayout";
@@ -31,6 +33,8 @@ function App() {
             <Route path="/accounts" element={<AccountsPage />} />
             <Route path="/categories" element={<CategoriesPage />} />
             <Route path="/import" element={<ImportPage />} />
+            <Route path="/transfers" element={<TransfersPage />} />
+            <Route path="/recurring" element={<RecurringPage />} />
           </Route>
         </Route>
 
