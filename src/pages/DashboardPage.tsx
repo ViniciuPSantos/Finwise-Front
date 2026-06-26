@@ -3,12 +3,17 @@ import StatCard from "../components/dashboard/StatCard";
 import SpendingDonut from "../components/dashboard/SpendingDonut";
 import EvolutionChart from "../components/dashboard/EvolutionChart";
 
-const YEAR = 2026;
-const MONTH = 5;
-
 export default function DashboardPage() {
+  const now = new Date();
+  const YEAR = now.getFullYear();
+  const MONTH = now.getMonth() + 1;
+
+  const startDate = `${YEAR}-01-01`;
+  const lastDay = new Date(YEAR, MONTH, 0).getDate();
+  const endDate = `${YEAR}-${String(MONTH).padStart(2, "0")}-${lastDay}`;
+
   const overview = useOverview(YEAR, MONTH);
-  const evolution = useMonthlyEvolution("2026-01-01", "2026-05-31");
+  const evolution = useMonthlyEvolution(startDate, endDate);
 
   if (overview.isLoading) {
     return <p className="text-ink-500">Carregando...</p>;

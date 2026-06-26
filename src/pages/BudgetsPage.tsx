@@ -7,10 +7,11 @@ import BudgetFormModal from "../components/budgets/BudgetFormModal";
 import ConfirmDialog from "../components/ConfirmDialog";
 import type { BudgetStatus } from "../services/budgetService";
 
-const YEAR = 2026;
-const MONTH = 5;
-
 export default function BudgetsPage() {
+  const now = new Date();
+  const YEAR = now.getFullYear();
+  const MONTH = now.getMonth() + 1;
+
   const query = useBudgetStatus(YEAR, MONTH);
   const { remove } = useBudgetMutations();
   const [modalOpen, setModalOpen] = useState(false);
