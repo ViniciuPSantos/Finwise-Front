@@ -1,6 +1,6 @@
 # FinWise Web
 
-Frontend da aplicação FinWise — gerenciamento de finanças pessoais com dashboard, controle de transações, orçamentos e importação via CSV.
+Frontend da aplicação FinWise — gerenciamento de finanças pessoais com dashboard, controle de transações, transferências, recorrentes, orçamentos e importação via CSV.
 
 ## Stack
 
@@ -46,12 +46,12 @@ npm run preview
 Crie um arquivo `.env` na raiz de `finwise-web/`:
 
 ```env
-VITE_API_URL=http://localhost:8080
+VITE_API_URL=https://finwise-51e0.onrender.com
 ```
 
 | Variável | Descrição |
 |---|---|
-| `VITE_API_URL` | URL base da API REST backend |
+| `VITE_API_URL` | URL base da API REST backend (Render) |
 
 ## Estrutura de páginas
 
@@ -62,6 +62,8 @@ VITE_API_URL=http://localhost:8080
 | `/register` | Cadastro | Público |
 | `/dashboard` | Visão geral mensal | Autenticado |
 | `/transactions` | Listagem e CRUD de transações | Autenticado |
+| `/transfers` | Transferências entre contas | Autenticado |
+| `/recurring` | Transações recorrentes | Autenticado |
 | `/budgets` | Gerenciamento de orçamentos | Autenticado |
 | `/accounts` | Gerenciamento de contas | Autenticado |
 | `/categories` | Gerenciamento de categorias | Autenticado |
@@ -89,6 +91,9 @@ Fluxo JWT com refresh token:
 | `GET/POST/PUT/DELETE` | `/api/accounts` | CRUD de contas |
 | `GET/POST/PUT/DELETE` | `/api/categories` | CRUD de categorias |
 | `GET/POST/PUT/DELETE` | `/api/budgets` | CRUD de orçamentos |
+| `GET/POST/DELETE` | `/api/transfers` | Transferências entre contas |
+| `GET/POST/PUT/DELETE` | `/api/recurring-transactions` | Transações recorrentes (DAILY, WEEKLY, MONTHLY, YEARLY) |
+| `GET` | `/api/me` | Perfil do usuário autenticado |
 | `POST` | `/api/imports/csv` | Importação de transações via arquivo CSV (`multipart/form-data`) |
 
 ## Importação CSV
